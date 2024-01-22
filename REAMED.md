@@ -6,8 +6,10 @@ The objective is to establish a robust and secure structure, ensuring the high t
 
 ## Tech Stack
 
-- NextJS - [/client](/client)
-- NestJS - [/server](/server)
+- NextJS as client
+- NestJS as server
+- Prisma as Database ORM
+- Postgresql as Database
 
 ## OAuth Flow
 
