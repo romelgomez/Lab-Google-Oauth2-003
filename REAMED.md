@@ -6,8 +6,8 @@ The objective is to establish a robust and secure structure, ensuring the high t
 
 ## Tech Stack
 
-- NextJS (Client)
-- NestJS (Server)
+- NextJS - [/client](/client)
+- NestJS - [/server](/server)
 
 ## OAuth Flow
 
