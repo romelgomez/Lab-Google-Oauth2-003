@@ -7,81 +7,86 @@ export class UserService {
   constructor(private prisma: PrismaService) {}
 
   async findAll(): Promise<UserDto[]> {
-    const user = await this.prisma.user.findMany();
+    const users = await this.prisma.user.findMany();
+
+    return users;
+  }
+
+  async findOne(id: string): Promise<UserDto | null> {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
 
     return user;
   }
 
-  // findOne(id: string): Promise<User | null> {
-  //   return this.repository.findOneBy({ id });
-  // }
+  async findOneByEmail(email: string): Promise<UserDto | null> {
+    const user = this.prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
 
-  // async findOneByEmail(email: string): Promise<User | null> {
-  //   return await this.repository.findOne({
-  //     where: { email },
-  //   });
-  // }
+    return user;
+  }
 
-  // async remove(id: number): Promise<void> {
-  //   await this.repository.delete(id);
-  // }
+  async remove(id: string): Promise<UserDto> {
+    const existingUser = await this.prisma.user.findUnique({
+      where: { id },
+    });
 
-  // async findOrFail(id: string): Promise<User> {
-  //   const user = await this.repository.findOneBy({ id });
+    if (existingUser) {
+      const isDeleted = existingUser.deleted != null;
 
-  //   if (!user) {
-  //     throw new Error('User not found');
-  //   }
+      return await this.prisma.user.update({
+        where: { id },
+        data: {
+          deleted: isDeleted ? null : new Date(), // Toggle deletion status
+        },
+      });
+    } else {
+      throw new Error('User not found');
+    }
+  }
 
-  //   return user;
-  // }
+  async createOrUpdate(userDto: UserDto): Promise<UserDto> {
+    return this.prisma.user.upsert({
+      where: { email: userDto.email },
+      update: userDto,
+      create: userDto,
+    });
+  }
 
-  // async createUser(user: UserDto, manager?: EntityManager): Promise<User> {
-  //   const repo = manager ? manager.getRepository(User) : this.repository;
+  async createNewUserOrFail(userDto: UserDto): Promise<UserDto> {
+    const existingUser = await this.prisma.user.findUnique({
+      where: { email: userDto.email },
+    });
 
-  //   const entity = repo.create(user);
-  //   return await repo.save(entity);
-  // }
+    if (existingUser) {
+      throw new Error('User already exists');
+    }
 
-  // async updateUser(user: UserDto, manager?: EntityManager): Promise<User> {
-  //   const repo = manager ? manager.getRepository(User) : this.repository;
+    return this.prisma.user.create({ data: userDto });
+  }
 
-  //   const entity = await repo.findOneBy({ id: user.id });
-  //   if (!entity) {
-  //     throw new Error('User not found');
-  //   }
+  async createUser(userDto: UserDto): Promise<UserDto> {
+    return this.prisma.user.create({ data: userDto });
+  }
 
-  //   Object.assign(entity, user);
+  async updateUser(userId: string, userDto: UserDto): Promise<UserDto> {
+    return this.prisma.user.update({
+      where: { id: userId },
+      data: userDto,
+    });
+  }
 
-  //   return await repo.save(entity);
-  // }
-
-  // async createUpdate(userDto: UserDto, manager?: EntityManager): Promise<User> {
-  //   const repo = manager ? manager.getRepository(User) : this.repository;
-
-  //   let user = await repo.findOneBy({ email: userDto.email });
-
-  //   if (user) {
-  //     Object.assign(user, userDto);
-  //   } else {
-  //     user = repo.create(userDto);
-  //   }
-
-  //   return await repo.save(user);
-  // }
-
-  // async createNewUserOrFail(
-  //   user: UserDto,
-  //   manager?: EntityManager,
-  // ): Promise<User> {
-  //   const repo = manager ? manager.getRepository(User) : this.repository;
-
-  //   const existingUser = await repo.findOneBy({ email: user.email });
-  //   if (existingUser) {
-  //     throw new Error('User already exists');
-  //   }
-
-  //   const entity = repo.create(user);
-  //   return await repo.save(entity);
-  // }
+  async findOrFail(id: string): Promise<UserDto> {
+    const user = await this.prisma.user.findUnique({ where: { id } });
+    if (!user) {
+      throw new Error('User not found');
+    }
+    return user;
+  }
 }
