@@ -29,16 +29,17 @@ model Profile {
 }
 
 model User {
-  id          String    @id @default(uuid())
-  email       String    @unique
-  familyName  String?
-  givenName   String?
-  displayName String?
-  created     DateTime  @default(now())
-  updated     DateTime  @updatedAt
-  deleted     DateTime?
-  posts       Post[]
-  profile     Profile?
+  id           String    @id @default(uuid())
+  email        String    @unique
+  familyName   String?
+  givenName    String?
+  displayName  String?
+  refreshToken String?
+  created      DateTime  @default(now())
+  updated      DateTime  @updatedAt
+  deleted      DateTime?
+  posts        Post[]
+  profile      Profile?
 }
 
 model Book {
