@@ -1,3 +1,6 @@
+# WIP: Work In Progress
+
+
 # Implementing OAuth 2.0 Server Flow: Maximising Security with Minimal Client-Side Exposure
 
 In this guide, we dig into the configuration of a client and server using OAuth 2.0. The goal is to reduce the exposure of sensitive information on the client side.
@@ -15,7 +18,7 @@ The objective is to establish a robust and secure structure, ensuring the high t
 
 ### Client Flow
 
-Part 1: Enhanced Initial Interaction
+Part 1: Initial Interaction
 
 1. Initiate Authentication via NestJS:
 
