@@ -1,16 +1,5 @@
 import { IsString, IsUUID, IsEmail, IsOptional, IsDate } from 'class-validator';
 
-// const user: {
-//   id: number;
-//   email: string;
-//   familyName: string;
-//   givenName: string;
-//   displayName: string;
-//   created: Date;
-//   updated: Date;
-//   deleted: Date;
-// }[]
-
 export class UserDto {
   @IsUUID()
   @IsOptional()
@@ -32,6 +21,12 @@ export class UserDto {
   @IsOptional()
   displayName?: string;
 
+
+  // TODO: 
+  // - [ ] Add Access and refresh tokens field
+  
+
+
   @IsDate()
   @IsOptional()
   created?: Date;
@@ -44,4 +39,3 @@ export class UserDto {
   @IsOptional()
   deleted?: Date;
 }
-

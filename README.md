@@ -138,3 +138,13 @@ Following the previously outlined steps, these security measures are integrated 
 
 8. **Rate Limiting and Abuse Prevention:**
    - Implement rate limiting on your authentication endpoints to prevent abuse and potential attacks like DDoS.
+
+## npm/yarn dependecies
+
+```
+yarn add @nestjs/passport passport passport-google-oauth20 express-session class-transformer class-validator
+```
+
+```
+yarn add @types/express-session @types/passport -D
+```

@@ -66,4 +66,6 @@ export enum ProcessEnvEnum {
 
   AT_SECRET = 'AT_SECRET',
   RT_SECRET = 'RT_SECRET',
+
+  SESSION_SECRET = 'SESSION_SECRET',
 }
