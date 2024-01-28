@@ -63,35 +63,3 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     return user;
   }
 }
-
-// {
-//   "id":"107573585242030639875",
-//   "displayName":"Romel Gomez",
-//   "name":{
-//      "familyName":"Gomez",
-//      "givenName":"Romel"
-//   },
-//   "emails":[
-//      {
-//         "value":"bmxandcode@gmail.com",
-//         "verified":true
-//      }
-//   ],
-//   "photos":[
-//      {
-//         "value":"https://lh3.googleusercontent.com/a/ACg8ocJ1vXd7N7AVLaUEeAOEGppB5k-nMYCaVEf_GDHlqaC_Rtg=s96-c"
-//      }
-//   ],
-//   "provider":"google",
-//   "_raw":"{\n  \"sub\": \"107573585242030639875\",\n  \"name\": \"Romel Gomez\",\n  \"given_name\": \"Romel\",\n  \"family_name\": \"Gomez\",\n  \"picture\": \"https://lh3.googleusercontent.com/a/ACg8ocJ1vXd7N7AVLaUEeAOEGppB5k-nMYCaVEf_GDHlqaC_Rtg\\u003ds96-c\",\n  \"email\": \"bmxandcode@gmail.com\",\n  \"email_verified\": true,\n  \"locale\": \"es-419\"\n}",
-//   "_json":{
-//      "sub":"107573585242030639875",
-//      "name":"Romel Gomez",
-//      "given_name":"Romel",
-//      "family_name":"Gomez",
-//      "picture":"https://lh3.googleusercontent.com/a/ACg8ocJ1vXd7N7AVLaUEeAOEGppB5k-nMYCaVEf_GDHlqaC_Rtg=s96-c",
-//      "email":"bmxandcode@gmail.com",
-//      "email_verified":true,
-//      "locale":"es-419"
-//   }
-// }
