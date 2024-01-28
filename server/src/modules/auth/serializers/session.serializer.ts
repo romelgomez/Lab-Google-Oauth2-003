@@ -13,8 +13,6 @@ export class SessionSerializer extends PassportSerializer {
     user: UserDto,
     done: (err: Error, user: UserDto) => void,
   ): void {
-    console.log('serializeUser', user);
-
     done(null, user);
   }
 
@@ -23,8 +21,6 @@ export class SessionSerializer extends PassportSerializer {
     done: (err: Error, payload: any) => void,
   ): Promise<void> {
     const payload = await this.authService.findUserById(user.id);
-
-    console.log('deserializeUser', payload);
 
     return payload ? done(null, payload) : done(null, null);
   }

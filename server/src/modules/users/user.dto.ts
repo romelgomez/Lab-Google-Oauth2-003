@@ -21,11 +21,13 @@ export class UserDto {
   @IsOptional()
   displayName?: string;
 
+  @IsString()
+  @IsOptional()
+  accessToken?: string;
 
-  // TODO: 
-  // - [ ] Add Access and refresh tokens field
-  
-
+  @IsString()
+  @IsOptional()
+  refreshToken?: string;
 
   @IsDate()
   @IsOptional()

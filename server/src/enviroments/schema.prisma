@@ -29,17 +29,47 @@ model Profile {
 }
 
 model User {
-  id           String    @id @default(uuid())
-  email        String    @unique
+  id           String       @id @default(uuid())
+  email        String       @unique
   familyName   String?
   givenName    String?
   displayName  String?
+  accessToken  String?
   refreshToken String?
-  created      DateTime  @default(now())
-  updated      DateTime  @updatedAt
+  created      DateTime     @default(now())
+  updated      DateTime     @updatedAt
   deleted      DateTime?
   posts        Post[]
   profile      Profile?
+  Session      Session?
+  OAuthToken   OAuthToken[]
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  userId       String   @unique
+  accessToken  String   @unique
+  refreshToken String   @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  expiresAt    DateTime // Fecha de caducidad del refreshToken
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId], name: "idx_session_userId")
+}
+
+model OAuthToken {
+  id           String   @id @default(uuid())
+  accessToken  String
+  refreshToken String
+  provider     String // Puede ser 'google', 'facebook', 'linkedin', etc.
+  userId       String
+  expiresAt    DateTime // Fecha de caducidad del accessToken
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId], name: "idx_oauth_token_userId")
 }
 
 model Book {
